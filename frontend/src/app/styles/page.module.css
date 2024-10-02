@@ -1,0 +1,110 @@
+/* Estilos para el contenedor principal */
+.mainContainer {
+  background-image: url('/image.png'); /* Imagen de fondo */
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen en el contenedor */
+  background-repeat: no-repeat; /* Previene que la imagen se repita */
+  min-height: 100vh; /* Asegura que el fondo cubra toda la altura de la vista */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para el navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+  z-index: 1;
+}
+
+/* Estilos para el logo */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para los enlaces de navegación */
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Botón de reservar */
+.reserveBtn {
+  background-color: #FFD700; /* Color del botón reservar */
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: black;
+}
+
+/* Estilos para el contenido principal */
+.mainContent {
+  flex: 1; /* Asegura que esta sección ocupe el espacio restante */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Estilos para la sección hero */
+.heroSection h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.button, .buttonYellow {
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.button {
+  background-color: black;
+  color: white;
+}
+
+.buttonYellow {
+  background-color: #FFD700;
+  color: black;
+}
+
+/* Estilos responsivos para dispositivos móviles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navLinks {
+    display: none; /* Ocultar enlaces de navegación por defecto */
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navLinks.active {
+    display: flex; /* Mostrar enlaces cuando se activa el menú */
+  }
+
+  .menuIcon {
+    display: block;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+  }
+}
