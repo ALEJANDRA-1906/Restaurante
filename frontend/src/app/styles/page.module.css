@@ -55,7 +55,7 @@ transition: background-color 0.3s ease;
 }
 
 .heroSection {
-  background-image: url('/hero-image.jpg');
+  background-image: url('/restarurantess.jpg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -146,7 +146,7 @@ transition: background-color 0.3s ease;
 
 .descriptionSection {
   position: relative;
-  background-image: url('/image.png'); /* Cambia la ruta según sea necesario */
+  background-image: url('/carta5.jpg'); /* Cambia la ruta según sea necesario */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -170,7 +170,7 @@ transition: background-color 0.3s ease;
 
 .descriptionSectionhistory {
   position: relative;
-  background-image: url('/sechistoti.jpg'); /* Cambia la ruta según sea necesario */
+  background-image: url('/histoy.jpg'); /* Cambia la ruta según sea necesario */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -217,7 +217,7 @@ transition: background-color 0.3s ease;
 
 .descriptionSectioncarta {
   position: relative;
-  background-image: url('/sect4.jpg'); /* Cambia la ruta según sea necesario */
+  background-image: url('/img13.jpg'); /* Cambia la ruta según sea necesario */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -266,7 +266,7 @@ transition: background-color 0.3s ease;
 
 .reservationSectionlocation {
   position: relative;
-  background-image: url('/sect5.jpg'); /* Ruta de la imagen de fondo */
+  background-image: url('/sect4.jpg'); /* Ruta de la imagen de fondo */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -363,9 +363,6 @@ transition: background-color 0.3s ease;
 .footer a:hover {
   color: #FFD700;
 }
-
-
-
 
 
 /* Icono de menú hamburguesa */

@@ -172,7 +172,7 @@ export default function Home() {
             <h1>Haz una reserva</h1>
             <p>También puedes reservar por teléfono si lo prefieres.</p>
             <form className={styles.reservationForm}>
-              <input type="text" placeholder="Indica el día y la hora" required />
+              <input type="datetime-local" placeholder="Indica el día y la hora" required />
               <input type="number" placeholder="Nº de comensales" required />
               <input type="text" placeholder="Escribe tu nombre" required />
               <input type="tel" placeholder="Tu teléfono" required />

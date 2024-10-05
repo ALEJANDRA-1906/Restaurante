@@ -7,6 +7,8 @@ class Mesa(models.Model):
     capacidad = models.IntegerField(default=2)  # Capacidad de la mesa, valor por defecto 2
 
 class Menu(models.Model):
+    titulo = models.CharField(max_length=100, null=True, blank=True)
+    foto = models.ImageField("foto", upload_to='menu_fotos/', null=True, blank=True) 
     descripcion = models.CharField(max_length=255) 
     precio = models.DecimalField(max_digits=10, decimal_places=2) 
 
