@@ -1,15 +1,28 @@
 "use client"; // Indica que este componente es un Client Component
 import Image from "next/image"; // Importación correcta del componente Image
 import styles from './styles/page.module.css'; // Importación de estilos
-import { useState } from "react"; // Importa useState
-
+import { useEffect, useState } from "react"; // Importa useState
+import { MenuItem } from "@/components/Menu/Menu";
+import axios from 'axios'
 export default function Home() {
   const [menuActive, setMenuActive] = useState(false); // Estado para el menú
   const [showMore, setShowMore] = useState(false); // Estado para mostrar más información
+  const [menuData, setMenuData] = useState([]);
 
   const toggleMenu = () => {
     setMenuActive(!menuActive); // Alternar el estado del menú
   };
+
+  useEffect(
+    () => {
+      const getMenu = async () =>{
+        const res = await axios.get("http://127.0.0.1:8000/api/menu/")
+        setMenuData(res.data)
+      }
+      getMenu()
+    }, []);
+  
+  
 
   return (
     <div className={styles.mainContainer}>
@@ -121,29 +134,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.descriptionSectioncarta} id="carta">
-        <div className={styles.overlay}></div>
-        <div className={styles.descriptionContainercarta}>
-          <h3 >Carta</h3>
-          <h1>Descarga nuestras cartas</h1>
-          <ul className={styles.menuList}>
-            <li>
-              Menú del día
-              <a href="/path/to/menudelDia.pdf" className={styles.downloadLink}>Descargar PDF</a>
-            </li>
-            <li>
-              Carta para grupos
-              <a href="/path/to/cartaGrupos.pdf" className={styles.downloadLink}>Descargar PDF</a>
-            </li>
-            <li>
-              Carta Navidad 2022
-              <a href="/path/to/cartaNavidad.pdf" className={styles.downloadLink}>Descargar PDF</a>
-            </li>
-          </ul>
-          
-          <div className={styles.reserveBtn}>
-            <a className={styles.textob} href="#">RESERVAR MESA</a> {/* Botón de reservar */}
-          </div>
+      <section className="menuContainer" id="carta"> 
+        <div className="menuContent"> 
+            <div className="menuHeader"> 
+                <h1>Menú Misku</h1> 
+            </div>
+            <div className="menuItems"> 
+                {menuData.map(item => (
+                    <MenuItem key={item.id} item={item} />
+                ))}
+            </div>
         </div>
       </section>
       <section className={styles.reservationSectionlocation} id="localizacion">
