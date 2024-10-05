@@ -36,11 +36,9 @@
   color: #FFD700; /* Color de hover */
 }
 .reserveBtnN {
-background-color: #0a0a0a;
 padding: 8px 10px;
 border-radius: 80px;
 color: black;
-transition: background-color 0.3s ease;
 }
 .reserveBtn {
   background-color: #FFD700;
@@ -176,6 +174,8 @@ transition: background-color 0.3s ease;
   background-repeat: no-repeat;
   min-height: 100vh; /* Altura mínima de la sección */
   display: flex;
+  justify-content: flex-end;
+  padding-right: 75px;
   align-items: center;
   color: white; /* Color del texto */
   font-family: 'Arial', sans-serif;

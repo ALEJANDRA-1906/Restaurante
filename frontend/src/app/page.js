@@ -4,14 +4,14 @@ import styles from './styles/page.module.css'; // Importación de estilos
 import { useEffect, useState } from "react"; // Importa useState
 import { MenuItem } from "@/components/Menu/Menu";
 import axios from 'axios'
+import { Navbar } from "@/components/Navbar/Navbar";
+import { Card } from "@/components/Card/Card";
 export default function Home() {
   const [menuActive, setMenuActive] = useState(false); // Estado para el menú
   const [showMore, setShowMore] = useState(false); // Estado para mostrar más información
   const [menuData, setMenuData] = useState([]);
 
-  const toggleMenu = () => {
-    setMenuActive(!menuActive); // Alternar el estado del menú
-  };
+
 
   useEffect(
     () => {
@@ -26,25 +26,7 @@ export default function Home() {
 
   return (
     <div className={styles.mainContainer}>
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <a href="/">
-            <Image src="/logo.png" alt="Restaurante Misku Logo" width={200} height={50} />
-          </a>
-        </div>
-
-        <div className={styles.menuIcon} onClick={toggleMenu}>
-          &#9776; {/* Ícono de hamburguesa */}
-        </div>
-
-        <ul className={`${styles.navLinks} ${menuActive ? styles.active : ''}`}>
-          <li><a href="#restaurante" className={styles.reserveBtnN}>RESTAURANTE</a></li>
-          <li><a href="#historia" className={styles.reserveBtnN}>HISTORIA</a></li>
-          <li><a href="#carta" className={styles.reserveBtnN}>CARTA</a></li>
-          <li><a href="#localizacion" className={styles.reserveBtnN}>LOCALIZACION</a></li>
-          <li><a href="#reservar" className={styles.reserveBtn}>RESERVAR</a></li>
-        </ul>
-      </nav>
+      <Navbar />
 
       <section className={`${styles.heroSection} ${menuActive ? styles.inactive : ''}`} >
         <div className={styles.overlay}></div>
@@ -59,79 +41,29 @@ export default function Home() {
 
       <section className={styles.descriptionSection} id="restaurante">
         <div className={styles.overlay}></div>
-        <div className={styles.descriptionContainer}>
-          <h3 >El Restaurante</h3>
-          <h1>Siéntete como en casa</h1>
-          <p>
-            Bienvenido a Restaurante Misku, donde la calidad de nuestros ingredientes y la dedicación de nuestro personal
+        <Card 
+          cardTitle="El Restaurante"
+          cardSubTitle="Siéntete como en casa"
+          cardDescription="Bienvenido a Restaurante Misku, donde la calidad de nuestros ingredientes y la dedicación de nuestro personal
             se unen para ofrecerte una experiencia gastronómica inigualable. Ven y disfruta de un ambiente acogedor,
-            deliciosos platillos y un servicio excepcional.
-          </p>
-          <p>
-            Bienvenido a Restaurante Misku, donde la calidad de nuestros ingredientes y la dedicación de nuestro personal
-            se unen para ofrecerte una experiencia gastronómica inigualable. Ven y disfruta de un ambiente acogedor,
-            deliciosos platillos y un servicio excepcional.
-          </p>
-            <a href="#" 
-              className={styles.readMoreLink} 
-              onClick={() => setShowMore(!showMore)}
-            >
-              {showMore ? 'Leer menos' : 'Leer más'}
-            </a>
-            {showMore && (
-              <div className={styles.additionalInfo}>
-                <p>
-                  Aquí puedes incluir información adicional sobre el restaurante, como el menú, eventos especiales,
-                  o detalles sobre la experiencia que ofreces. 
-                </p>
-                <p>
-                  Ofrecemos una variedad de platillos, desde opciones vegetarianas hasta los más suculentos cortes de
-                  carne. Nuestro equipo está listo para hacer de tu visita una experiencia inolvidable.
-                </p>
-              </div>
-            )}
-          <div className={styles.reserveBtn}>
-          <a className={styles.textob} href="#" >RESERVAR MESA</a> {/* Botón de reservar */}
-          </div>
-        </div>
+            deliciosos platillos y un servicio excepcional."
+          cardMoreInfo="Ofrecemos una variedad de platillos, desde opciones vegetarianas hasta los más suculentos cortes de
+                  carne. Nuestro equipo está listo para hacer de tu visita una experiencia inolvidable."
+          cardBtnTxt="RESERVAR MESA"
+        />
       </section>
       <section className={styles.descriptionSectionhistory} id="historia">
         <div className={styles.overlay}></div>
-        <div className={styles.descriptionContainerhistory}>
-          <h3>Historia</h3>
-          <h1>20 años sintiendo la gastronomía</h1>
-          <p>
-            Bienvenido a Restaurante Misku, donde la calidad de nuestros ingredientes y la dedicación de nuestro personal
+        <Card 
+          cardTitle="Historia"
+          cardSubTitle="20 años sintiendo la gastronomía"
+          cardDescription="Bienvenido a Restaurante Misku, donde la calidad de nuestros ingredientes y la dedicación de nuestro personal
             se unen para ofrecerte una experiencia gastronómica inigualable. Ven y disfruta de un ambiente acogedor,
-            deliciosos platillos y un servicio excepcional.
-          </p>
-          <p>
-            Bienvenido a Restaurante Misku, donde la calidad de nuestros ingredientes y la dedicación de nuestro personal
-            se unen para ofrecerte una experiencia gastronómica inigualable. Ven y disfruta de un ambiente acogedor,
-            deliciosos platillos y un servicio excepcional.
-          </p>
-            <a href="#" 
-              className={styles.readMoreLink} 
-              onClick={() => setShowMore(!showMore)}
-            >
-              {showMore ? 'Leer menos' : 'Leer más'}
-            </a>
-            {showMore && (
-              <div className={styles.additionalInfo}>
-                <p>
-                  Aquí puedes incluir información adicional sobre el restaurante, como el menú, eventos especiales,
-                  o detalles sobre la experiencia que ofreces. 
-                </p>
-                <p>
-                  Ofrecemos una variedad de platillos, desde opciones vegetarianas hasta los más suculentos cortes de
-                  carne. Nuestro equipo está listo para hacer de tu visita una experiencia inolvidable.
-                </p>
-              </div>
-            )}
-          <div className={styles.reserveBtn}>
-          <a className={styles.textob} href="#" >VER CARTA</a> {/* Botón de reservar */}
-          </div>
-        </div>
+            deliciosos platillos y un servicio excepcional."
+          cardMoreInfo="Aquí puedes incluir información adicional sobre el restaurante, como el menú, eventos especiales,
+                  o detalles sobre la experiencia que ofreces. "
+          cardBtnTxt="VER CARTA"
+        />
       </section>
 
       <section className="menuContainer" id="carta"> 

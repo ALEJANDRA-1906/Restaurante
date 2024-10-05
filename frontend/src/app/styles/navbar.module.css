@@ -1,0 +1,53 @@
+
+/* Estilos para el navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 25px;
+    z-index: 10;
+    font-family: 'Arial', sans-serif;
+    max-width: 200vh; /* Ancho máximo para el navbar */
+    margin: 0 auto; /* Centra el navbar en la pantalla */
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navLinks {
+    display: flex;
+    list-style: none;
+    
+  }
+  
+  .navLinks li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    
+  }
+  
+  .navLinks a:hover {
+    color: #FFD700; /* Color de hover */
+  }
+  .reserveBtnN {
+  padding: 8px 10px;
+  border-radius: 80px;
+  color: black;
+  }
+  .reserveBtn {
+    background-color: #FFD700;
+    padding: 10px 30px;
+    border-radius: 80px;
+    color: black;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reserveBtn:hover {
+    background-color: #f0c500;
+  }
