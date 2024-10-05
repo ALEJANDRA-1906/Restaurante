@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny  # Cambia esto según tus necesidades
-from .models import Mesa, Menu, Reserva, ReservaMenu
-from .serializers import MesaSerializer, MenuSerializer, ReservaSerializer, ReservaMenuSerializer
+from .models import Mesa, Menu, Reserva
+from .serializers import MesaSerializer, MenuSerializer, ReservaSerializer
 
 class MesaViewSet(viewsets.ModelViewSet):
     queryset = Mesa.objects.all()
@@ -18,7 +18,3 @@ class ReservaViewSet(viewsets.ModelViewSet):
     serializer_class = ReservaSerializer
     permission_classes = [AllowAny]
 
-class ReservaMenuViewSet(viewsets.ModelViewSet):
-    queryset = ReservaMenu.objects.all()
-    serializer_class = ReservaMenuSerializer
-    permission_classes = [AllowAny]  

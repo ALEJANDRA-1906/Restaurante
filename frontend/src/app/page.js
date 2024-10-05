@@ -2,27 +2,58 @@
 import Image from "next/image"; // Importación correcta del componente Image
 import styles from './styles/page.module.css'; // Importación de estilos
 import { useEffect, useState } from "react"; // Importa useState
-import { MenuItem } from "@/components/Menu/Menu";
-import axios from 'axios'
+import { MenuItem } from "@/components/Menu/Menu"; // Importa tu componente MenuItem
+import axios from 'axios';
+import Link from "next/link"; // Asegúrate de importar Link aquí
+
+
 export default function Home() {
   const [menuActive, setMenuActive] = useState(false); // Estado para el menú
   const [showMore, setShowMore] = useState(false); // Estado para mostrar más información
-  const [menuData, setMenuData] = useState([]);
+  const [menuData, setMenuData] = useState([]); // Estado para los datos del menú
+  const [showCard, setShowCard] = useState(false); // Estado para mostrar la tarjeta de reserva
+  const [showForm, setShowForm] = useState(false); // Estado para mostrar el formulario de reserva
 
+  // Alternar el estado del menú
   const toggleMenu = () => {
-    setMenuActive(!menuActive); // Alternar el estado del menú
+    setMenuActive(!menuActive);
   };
 
-  useEffect(
-    () => {
-      const getMenu = async () =>{
-        const res = await axios.get("http://127.0.0.1:8000/api/menu/")
-        setMenuData(res.data)
+  // Función para obtener el menú desde la API
+  useEffect(() => {
+    const getMenu = async () => {
+      try {
+        const res = await axios.get("http://127.0.0.1:8000/api/menu/");
+        setMenuData(res.data);
+      } catch (error) {
+        console.error("Error al obtener el menú:", error);
       }
-      getMenu()
-    }, []);
-  
-  
+    };
+    getMenu();
+  }, []);
+
+  // Función para mostrar la tarjeta de reserva
+  const handleShowCard = () => {
+    setShowCard(true);
+  };
+
+  // Función para mostrar el formulario de reserva
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
+
+  // Función para manejar el envío del formulario de reserva
+  const handleReservationSubmit = (e) => {
+    e.preventDefault();
+    // Aquí iría la lógica para enviar la reserva (puedes agregar una llamada a la API o algo similar)
+    alert("Reserva realizada con éxito");
+  };
+
+  // Función para obtener la fecha y hora mínima (evitar fechas pasadas)
+  const getMinDateTime = () => {
+    const now = new Date();
+    return now.toISOString().slice(0, 16); // Formato 'yyyy-MM-ddThh:mm'
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -46,15 +77,15 @@ export default function Home() {
         </ul>
       </nav>
 
-      <section className={`${styles.heroSection} ${menuActive ? styles.inactive : ''}`} >
+      <section className={`${styles.heroSection} ${menuActive ? styles.inactive : ''}`}>
         <div className={styles.overlay}></div>
-        <div className={styles.content} >
+        <div className={styles.content}>
           <h1 className={styles.fondo}> DISFRUTA UN AMBIENTE <span className={styles.unico}>ÚNICO Y ESPECIAL</span></h1>
-          <div  className={styles.buttons}>
+          <div className={styles.buttons}>
             <a href="#" className={styles.button}>VER CARTA</a>
             <a href="#" className={styles.buttonYellow}>RESERVAR MESA</a>
           </div>
-        </div>          
+        </div>
       </section>
 
       <section className={styles.descriptionSection} id="restaurante">
@@ -146,45 +177,44 @@ export default function Home() {
             </div>
         </div>
       </section>
-      <section className={styles.reservationSectionlocation} id="localizacion">
-        <div className={styles.overlay}></div> 
-        <div className={styles.reservationContainerlocation}>
-        
-          <div className={styles.locationSection}>
-            <h3>Localización</h3>
-            <h1>Te esperamos</h1>
-            <p><strong>Horario</strong></p>
-            <p>De Martes a Domingo, de 8:00h a 23:00h.</p>
-            <a href="#">Ver calendario de festivos</a>
-            <hr className={styles.divider} /> 
-            <p><strong>Dirección</strong></p>
-            <p>Calle Cualquiera 123, Cualquier Lugar, CP: 12345</p>
-            <p><strong>Teléfono</strong></p>
-            <p>91-1234-567</p>
-            <p><strong>Email</strong></p>
-            <p><a href="mailto:hola@unsitiogenial.es">hola@unsitiogenial.es</a></p>
-            <p><strong>Redes sociales</strong></p>
-            <p><a href="#">@unsitiogenial</a></p>
-          </div>
 
-          
+      {/* Sección de localización */}
+      <section className={styles.reservationSectionlocation} id="localizacion">
+        <div className={styles.overlay}></div>
+        <div className={styles.reservationContainerlocation}>
+          {/* Información de Localización */}
+          <div className={styles.locationSection}>
+      <h3>Localización</h3>
+      <h1>Te esperamos</h1>
+      <p><strong>Horario</strong></p>
+      <p>De Martes a Domingo, de 8:00h a 23:00h.</p>
+      <a href="#">Ver calendario de festivos</a>
+      <hr className={styles.divider} />
+      <p><strong>Dirección</strong></p>
+      <p>Calle Cualquiera 123, Cualquier Lugar, CP: 12345</p>
+      <p><strong>Teléfono</strong></p>
+      <p>91-1234-567</p>
+      <p><strong>Email</strong></p>
+      <p><a href="mailto:hola@unsitiogenial.es">hola@unsitiogenial.es</a></p>
+      <p><strong>Redes sociales</strong></p>
+      <p><a href="#">@unsitiogenial</a></p>
+    </div>
+
+          {/* Botón para iniciar la reserva */}
           <div className={styles.reservationFormSection} id="reservar">
-            <h1>Haz una reserva</h1>
-            <p>También puedes reservar por teléfono si lo prefieres.</p>
-            <form className={styles.reservationForm}>
-              <input type="datetime-local" placeholder="Indica el día y la hora" required />
-              <input type="number" placeholder="Nº de comensales" required />
-              <input type="text" placeholder="Escribe tu nombre" required />
-              <input type="tel" placeholder="Tu teléfono" required />
-              <button type="submit" className={styles.reserveButton}>RESERVAR</button>
-            </form>
+          <Link href="/terjetas_reserva">
+            <button className={styles.reserveButton}>
+              Reservar mesa
+            </button>
+          </Link> 
+
           </div>
         </div>
+
         <footer className={styles.footer}>
-          Restaurante ensigna 2022 - <a href="#">Política de privacidad</a>
+          Restaurante Misku 2024 - <a href="#">Política de privacidad</a>
         </footer>
       </section>
-
     </div>
   );
 }

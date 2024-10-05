@@ -13,16 +13,16 @@ class Menu(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2) 
 
 class Reserva(models.Model):
-    fecha_reserva = models.DateTimeField()  
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  
-    mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE)
-    menus = models.ManyToManyField(Menu, through='ReservaMenu', related_name='reservas')  
-    def clean(self):
-        # Validación para asegurar que la fecha y hora de la reserva no sean en el pasado
-        if self.fecha_reserva < timezone.now():
-            raise ValidationError("La fecha y hora de la reserva no pueden estar en el pasado.")
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=15)
+    num_comensales = models.PositiveIntegerField()
+    celebracion = models.CharField(max_length=100)
+    fecha = models.DateField()  # Guardar la fecha
+    hora = models.TimeField()    # Guardar la hora
+    mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE)  # Relación con la mesa
 
-class ReservaMenu(models.Model):
-    reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE) 
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)  
-    cantidad = models.PositiveIntegerField(default=1)  
+    def __str__(self):
+        return f"Reserva de {self.nombre} {self.apellido} para el {self.fecha} a las {self.hora}"
+
