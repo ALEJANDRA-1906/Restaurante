@@ -1,14 +1,14 @@
+from django.urls import path, include
 from rest_framework import routers
-from .views import MesaViewSet, MenuViewSet, ReservaViewSet, ReservaMenuViewSet
+from .views import MesaViewSet, MenuViewSet, ReservaViewSet
 
-# Crear un enrutador y registrar 
+# Crear un enrutador y registrar los viewsets
 router = routers.DefaultRouter()
-router.register('api/mesa', MesaViewSet, 'mesa')
-
-router.register('api/menu', MenuViewSet, 'menu')
-router.register('api/reservas', ReservaViewSet, 'reservas')
-
-router.register('api/reservas-menus', ReservaMenuViewSet, 'reservas-menus')
+router.register(r'mesa', MesaViewSet, basename='mesa')   # Eliminar 'api/' del registro
+router.register(r'menu', MenuViewSet, basename='menu')   # Eliminar 'api/' del registro
+router.register(r'reservas', ReservaViewSet, basename='reservas')  # Eliminar 'api/' del registro
 
 # Las URLs de la API se determinan automáticamente en función del enrutador
-urlpatterns = router.urls
+urlpatterns = [
+    path('api/', include(router.urls)),  # Prefijo 'api/' para todas las rutas
+]

@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Mesa, Menu, Reserva, ReservaMenu
+from .models import Mesa, Menu, Reserva
 
 class MesaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +16,4 @@ class ReservaSerializer(serializers.ModelSerializer):
         model = Reserva
         fields = '__all__'
 
-class ReservaMenuSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ReservaMenu
-        fields = '__all__'
+
