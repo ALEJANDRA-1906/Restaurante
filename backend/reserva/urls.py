@@ -10,5 +10,5 @@ router.register(r'reservas', ReservaViewSet, basename='reservas')  # Eliminar 'a
 
 # Las URLs de la API se determinan automáticamente en función del enrutador
 urlpatterns = [
-    path('api/', include(router.urls)),  # Prefijo 'api/' para todas las rutas
+    path('', include(router.urls)), 
 ]
