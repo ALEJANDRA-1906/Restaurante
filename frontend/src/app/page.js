@@ -133,6 +133,11 @@ export default function Home() {
 
           {/* Botón para iniciar la reserva */}
           <div className={styles.reservationFormSection} id="reservar">
+            <h1 className={styles.reservationtitle}>Haz una reserva</h1>
+            <h3 className={styles.reservationparrafo}>Ven a vivir la experiencia Misku, reserva tu ​mesa y evita la espera, 
+              tenemos promociones ​para tus eventos especiales como cumpleaños, 
+              ​aniversarios, cenas de navidad, 
+              despedidas de ​soltera... pregunta por nuestros paquetes.</h3>
           <Link href="/terjetas_reserva">
             <button className={styles.reserveButton}>
               Reservar mesa

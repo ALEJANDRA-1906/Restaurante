@@ -16,7 +16,7 @@ class Reserva(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     email = models.EmailField()
-    telefono = models.CharField(max_length=15)
+    telefono = models.CharField(max_length=10)
     num_comensales = models.PositiveIntegerField()
     celebracion = models.CharField(max_length=100)
     fecha = models.DateField()  # Guardar la fecha

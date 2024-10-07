@@ -335,15 +335,42 @@ color: black;
   color: #ccc; /* Color del placeholder */
 }
 
+/* Estilos para la sección de formulario de reserva */
+.reservationFormSection {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px; /* Ajusta según el tamaño deseado */
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Estilos para el título */
+.reservationtitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para el párrafo */
+.reservationparrafo {
+  text-align: justify; /* Justifica el texto del párrafo */
+  margin-bottom: 20px; /* Añade espacio debajo del párrafo */
+  font-size: 16px;
+  line-height: 2;
+}
+
+/* Estilos para el botón de reservar */
 .reserveButton {
-  padding: 15px;
+  width: 100%; /* Ocupa todo el ancho del card */
+  padding: 15px 20px;
+  font-size: 18px;
   background-color: #FFD700; /* Color del botón */
   border: none;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 50px; /* Añade separación entre el botón y el párrafo */
 }
+
 
 .reserveButton:hover {
   background-color: #e5c200; /* Color del botón en hover */

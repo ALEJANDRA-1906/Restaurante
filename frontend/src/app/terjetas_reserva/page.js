@@ -6,6 +6,11 @@ import styles from '../styles/TarjetaReserva.module.css';
 import axios from "axios";
 import { Boton } from "@/components/Boton/Boton";
 
+const typeHttpResponseText = {
+  Created: "Created",
+  Internal: "Internal"
+}
+
 export default function TarjetaReserva() {
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -18,13 +23,13 @@ export default function TarjetaReserva() {
     telefono: '',
     num_comensales: '',
     celebracion: '',
-    mesa: '', // Aquí se guardará el ID de la mesa seleccionada
+    mesa: '', 
   });
-  
-  const [mesas, setMesas] = useState([]); // Estado para las mesas disponibles
+
+  const [mesas, setMesas] = useState([]);
+  const [errors, setErrors] = useState([]); // Estado para almacenar errores
 
   useEffect(() => {
-    // Llama a tu API para obtener las mesas disponibles
     const fetchMesas = async () => {
       try {
         const res = await axios.get('http://127.0.0.1:8000/api/mesa/');
@@ -57,20 +62,42 @@ export default function TarjetaReserva() {
     });
   };
 
-  // Aquí es donde defines la función handleSubmit
+  const validatePhone = (phone) => {
+    const phoneRegex = /^[0-9]{10}$/; // Solo números y debe tener exactamente 10 dígitos
+    return phoneRegex.test(phone);
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Valida el formato del correo
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evita el comportamiento predeterminado del formulario
-    try {
-    const [timePart, period] = selectedTime.split(/(am|pm)/);
-    let [hh, mm] = timePart.split(':').map(Number);
-    
-    if (period && period.trim() === 'pm' && hh < 12) {
-      hh += 12;
-    } else if (period && period.trim() === 'am' && hh === 12) {
-      hh = 0;
+    e.preventDefault();
+    setErrors([]); // Limpiar errores antes de la validación
+
+    // Validar teléfono y correo electrónico
+    if (!validatePhone(formData.telefono)) {
+      alert("El número de teléfono debe contener exactamente 10 dígitos.");
+      return;
     }
 
-    const formattedTime = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+    if (!validateEmail(formData.email)) {
+      alert("Por favor, introduce un correo electrónico válido.");
+      return;
+    }
+
+    try {
+      const [timePart, period] = selectedTime.split(/(am|pm)/);
+      let [hh, mm] = timePart.split(':').map(Number);
+    
+      if (period && period.trim() === 'pm' && hh < 12) {
+        hh += 12;
+      } else if (period && period.trim() === 'am' && hh === 12) {
+        hh = 0;
+      }
+
+      const formattedTime = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
 
       const res = await axios.post('http://127.0.0.1:8000/api/reservas/', 
         {
@@ -78,12 +105,49 @@ export default function TarjetaReserva() {
           fecha: selectedDate.toISOString().split('T')[0], 
           hora: formattedTime 
         }
-      )
+      );
 
-      // Aquí puedes agregar una notificación o redirigir al usuario a otra página
+      if (res.statusText === typeHttpResponseText.Created) {
+        setShowForm(false);
+        alert("Reserva realizada con éxito.");
+
+        // Reiniciar el formulario
+        setFormData({
+          nombre: '',
+          apellido: '',
+          email: '',
+          telefono: '',
+          num_comensales: '',
+          celebracion: '',
+          mesa: '',
+        });
+        setSelectedDate(null);
+        setSelectedTime(null);
+      }
+
     } catch (error) {
-      console.error('Error:', error);
+      // Manejo de errores para mostrar en el frontend
+      if (error.response && error.response.data) {
+        setErrors(Object.values(error.response.data)); // Asigna los errores a la lista
+      } else {
+        console.error('Error:', error);
+      }
     }
+  };
+
+  const handleCancel = () => {
+    setShowForm(false);
+    setFormData({
+      nombre: '',
+      apellido: '',
+      email: '',
+      telefono: '',
+      num_comensales: '',
+      celebracion: '',
+      mesa: '',
+    });
+    setSelectedDate(null);
+    setSelectedTime(null);
   };
 
   const availableTimes = [
@@ -150,7 +214,6 @@ export default function TarjetaReserva() {
                     btnClass={styles.timeButton}
                     btnFunction={() => handleTimeSelect(time)}
                   />
-                  
                 ))}
               </div>
             </div>
@@ -163,38 +226,53 @@ export default function TarjetaReserva() {
                 <p>Fecha seleccionada: {selectedDate && selectedDate.toLocaleDateString()}</p>
                 <p>Hora seleccionada: {selectedTime}</p>
 
-                <form onSubmit={handleSubmit}>
-                  <label>Número de comensales:</label>
-                  <input className={styles.formInput} type="number" name="num_comensales" value={formData.num_comensales} onChange={handleChange} required />
-
-                  <label>Nombre:</label>
-                  <input className={styles.formInput} type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
-
-                  <label>Apellido:</label>
-                  <input className={styles.formInput} type="text" name="apellido" value={formData.apellido} onChange={handleChange} required />
-
-                  <label>Teléfono:</label>
-                  <input className={styles.formInput} type="tel" name="telefono" value={formData.telefono} onChange={handleChange} required />
-
-                  <label>Correo electrónico:</label>
-                  <input className={styles.formInput} type="email" name="email" value={formData.email} onChange={handleChange} required />
-
-                  <label>¿Qué van a celebrar?</label>
-                  <input className={styles.formInput} type="text" name="celebracion" value={formData.celebracion} onChange={handleChange} required />
-
-                  <label>Selecciona una mesa:</label>
-                  <select className={styles.formInput} name="mesa" value={formData.mesa} onChange={handleChange} required>
-                    <option value="0">Selecciona una mesa</option>
-                    {mesas.map(mesa => (
-                      <option key={mesa.id} value={mesa.id}>
-                        {mesa.nombre} (Mesa {mesa.id}) {/* Aquí puedes mostrar más detalles de la mesa si lo deseas */}
-                      </option>
+                {errors.length > 0 && ( // Mostrar errores
+                  <div className={styles.errorContainer}>
+                    {errors.map((error, index) => (
+                      <div key={index} className={styles.errorMessage}>{error}</div>
                     ))}
-                  </select>
+                  </div>
+                )}
 
+                <form onSubmit={handleSubmit}>
+                  <div className={styles.formInputs}>
+                    <div>
+                      <label>Número de comensales:</label>
+                      <input className={styles.formInput} type="number" name="num_comensales" value={formData.num_comensales} onChange={handleChange} required />
+                    </div>
+                    <div>
+                      <label>Nombre:</label>
+                      <input className={styles.formInput} type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
+                    </div>
+                    <div>
+                      <label>Apellido:</label>
+                      <input className={styles.formInput} type="text" name="apellido" value={formData.apellido} onChange={handleChange} required />
+                    </div>
+                    <div>
+                      <label>Email:</label>
+                      <input className={styles.formInput} type="email" name="email" value={formData.email} onChange={handleChange} required />
+                    </div>
+                    <div>
+                      <label>Teléfono:</label>
+                      <input className={styles.formInput} type="tel" name="telefono" value={formData.telefono} onChange={handleChange} required />
+                    </div>
+                    <div>
+                      <label>Celebración:</label>
+                      <input className={styles.formInput} type="text" name="celebracion" value={formData.celebracion} onChange={handleChange} />
+                    </div>
+                    <div>
+                      <label>Mesa:</label>
+                      <select className={styles.formInput} name="mesa" value={formData.mesa} onChange={handleChange} required>
+                        <option value="">Selecciona una mesa</option>
+                        {mesas.map(mesa => (
+                          <option key={mesa.id} value={mesa.id}>Mesa {mesa.id} - Capacidad: {mesa.capacidad}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
                   <div className={styles.buttonContainer}>
                     <button type="submit" className={styles.reserveButton}>Reservar</button>
-                    <button type="button" className={styles.cancelButton} onClick={() => setShowForm(false)}>Cancelar</button>
+                    <button className={styles.cancelButton} onClick={() => setShowForm(false)}>Cancelar</button>
                   </div>
                 </form>
               </div>
