@@ -6,6 +6,12 @@ import styles from '../styles/TarjetaReserva.module.css';
 import axios from "axios";
 import { Boton } from "@/components/Boton/Boton";
 
+const typeHttpResponseText = {
+  Created: "Created",
+  Internal: "Internal"
+}
+
+
 export default function TarjetaReserva() {
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -79,6 +85,10 @@ export default function TarjetaReserva() {
           hora: formattedTime 
         }
       )
+      if(res.statusText === typeHttpResponseText.Created){
+        setShowForm(false)
+        alert("Reserva realizada con exito");
+      }
 
       // Aquí puedes agregar una notificación o redirigir al usuario a otra página
     } catch (error) {
@@ -132,6 +142,7 @@ export default function TarjetaReserva() {
             <div className={styles.datePickerContainer}>
               <h2>Selecciona fecha</h2>
               <DatePicker
+                
                 selected={selectedDate}
                 onChange={handleDateChange}
                 dateFormat="dd/MM/yyyy"
