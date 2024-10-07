@@ -76,8 +76,7 @@ export default function TarjetaReserva() {
       hh = 0;
     }
 
-    const formattedTime = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
-
+    const formattedTime = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`; 
       const res = await axios.post('http://127.0.0.1:8000/api/reservas/', 
         {
           ...formData,
@@ -86,8 +85,17 @@ export default function TarjetaReserva() {
         }
       )
       if(res.statusText === typeHttpResponseText.Created){
-        setShowForm(false)
+        setShowForm(false);
         alert("Reserva realizada con exito");
+        setFormData({
+          nombre: '',
+          apellido: '',
+          email: '',
+          telefono: '',
+          num_comensales: '',
+          celebracion: '',
+          mesa: '', 
+        })
       }
 
       // Aquí puedes agregar una notificación o redirigir al usuario a otra página

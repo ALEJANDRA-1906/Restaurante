@@ -1,25 +1,24 @@
-import React from 'react'
-import styles from '../../../src/app/styles/navbar.module.css'; 
-import { useState } from "react";
-import Image from "next/image";
+import React, { useState } from 'react';
+import styles from '../../../src/app/styles/navbar.module.css';
+import Image from 'next/image';
 
-
-export function Navbar(){
-    const [menuActive, setMenuActive] = useState(false); 
+export function Navbar() {
+    const [menuActive, setMenuActive] = useState(false);
 
     const toggleMenu = () => {
-        setMenuActive(!menuActive); 
+        setMenuActive(!menuActive);
     };
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.logo}>
                 <a href="/">
-                    <Image src="/logo.png" alt="Restaurante Misku Logo" width={200} height={50} />
+                    <Image src="/logo.png" alt="Restaurante Misku Logo" width={150} height={40} />
                 </a>
             </div>
 
             <div className={styles.menuIcon} onClick={toggleMenu}>
-                &#9776; 
+                &#9776; {/* Icono del menú */}
             </div>
 
             <ul className={`${styles.navLinks} ${menuActive ? styles.active : ''}`}>
@@ -30,5 +29,5 @@ export function Navbar(){
                 <li><a href="#reservar" className={styles.reserveBtn}>RESERVAR</a></li>
             </ul>
         </nav>
-    )
+    );
 }

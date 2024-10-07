@@ -15,6 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     const getMenu = async () => {
+      //Obtener
       try {
         const res = await axios.get("http://127.0.0.1:8000/api/menu/");
         setMenuData(res.data);
