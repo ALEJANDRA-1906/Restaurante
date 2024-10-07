@@ -12,42 +12,67 @@
     font-family: 'Arial', sans-serif;
     max-width: 200vh; /* Ancho máximo para el navbar */
     margin: 0 auto; /* Centra el navbar en la pantalla */
-  }
+}
   
-  .logo {
+.logo {
     display: flex;
     align-items: center;
-  }
+}
   
-  .navLinks {
+.navLinks {
     display: flex;
     list-style: none;
-    
-  }
+}
   
-  .navLinks li a {
+.navLinks li a {
     color: white;
     text-decoration: none;
     padding: 10px 15px;
-    
-  }
+    }
   
-  .navLinks a:hover {
+.navLinks a:hover {
     color: #FFD700; /* Color de hover */
-  }
-  .reserveBtnN {
+}
+.reserveBtnN {
   padding: 8px 10px;
   border-radius: 80px;
   color: black;
-  }
-  .reserveBtn {
+}
+.reserveBtn {
     background-color: #FFD700;
     padding: 10px 30px;
     border-radius: 80px;
     color: black;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .reserveBtn:hover {
+.reserveBtn:hover {
     background-color: #f0c500;
-  }
+}
+
+@media (max-width: 768px) {
+    .heroSection h1 {
+      font-size: 2.5rem; 
+    }
+  
+    .unico {
+      font-size: 2.5rem; 
+    }
+  
+    .buttons .button, .buttons .buttonYellow {
+      font-size: 0.9rem; 
+      padding: 10px 20px; 
+    }
+  
+    .descriptionContainer, .descriptionContainerhistory, .descriptionContainercarta {
+      max-width: 90%;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  
+    .reservationContainerlocation {
+      flex-direction: column; 
+      max-width: 100%; 
+      padding: 20px;
+    }
+}

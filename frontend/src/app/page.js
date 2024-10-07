@@ -11,14 +11,8 @@ import Link from "next/link";
 
 export default function Home() {
   const [menuActive, setMenuActive] = useState(false); // Estado para el menú
-  const [showMore, setShowMore] = useState(false); // Estado para mostrar más información
   const [menuData, setMenuData] = useState([]); // Estado para los datos del menú
-  const [showCard, setShowCard] = useState(false); // Estado para mostrar la tarjeta de reserva
-  const [showForm, setShowForm] = useState(false); // Estado para mostrar el formulario de reserva
 
-
-
-  // Función para obtener el menú desde la API
   useEffect(() => {
     const getMenu = async () => {
       try {
@@ -30,29 +24,6 @@ export default function Home() {
     };
     getMenu();
   }, []);
-
-  // Función para mostrar la tarjeta de reserva
-  const handleShowCard = () => {
-    setShowCard(true);
-  };
-
-  // Función para mostrar el formulario de reserva
-  const handleShowForm = () => {
-    setShowForm(true);
-  };
-
-  // Función para manejar el envío del formulario de reserva
-  const handleReservationSubmit = (e) => {
-    e.preventDefault();
-    // Aquí iría la lógica para enviar la reserva (puedes agregar una llamada a la API o algo similar)
-    alert("Reserva realizada con éxito");
-  };
-
-  // Función para obtener la fecha y hora mínima (evitar fechas pasadas)
-  const getMinDateTime = () => {
-    const now = new Date();
-    return now.toISOString().slice(0, 16); // Formato 'yyyy-MM-ddThh:mm'
-  };
 
   return (
     <div className={styles.mainContainer}>
@@ -109,29 +80,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección de localización */}
       <section className={styles.reservationSectionlocation} id="localizacion">
         <div className={styles.overlay}></div>
         <div className={styles.reservationContainerlocation}>
-          {/* Información de Localización */}
           <div className={styles.locationSection}>
-      <h3>Localización</h3>
-      <h1>Te esperamos</h1>
-      <p><strong>Horario</strong></p>
-      <p>De Martes a Domingo, de 8:00h a 23:00h.</p>
-      <a href="#">Ver calendario de festivos</a>
-      <hr className={styles.divider} />
-      <p><strong>Dirección</strong></p>
-      <p>Calle Cualquiera 123, Cualquier Lugar, CP: 12345</p>
-      <p><strong>Teléfono</strong></p>
-      <p>91-1234-567</p>
-      <p><strong>Email</strong></p>
-      <p><a href="mailto:hola@unsitiogenial.es">hola@unsitiogenial.es</a></p>
-      <p><strong>Redes sociales</strong></p>
-      <p><a href="#">@unsitiogenial</a></p>
-    </div>
+            <h3>Localización</h3>
+            <h1>Te esperamos</h1>
+            <p><strong>Horario</strong></p>
+            <p>De Martes a Domingo, de 8:00h a 23:00h.</p>
+            <a href="#">Ver calendario de festivos</a>
+            <hr className={styles.divider} />
+            <p><strong>Dirección</strong></p>
+            <p>Calle Cualquiera 123, Cualquier Lugar, CP: 12345</p>
+            <p><strong>Teléfono</strong></p>
+            <p>91-1234-567</p>
+            <p><strong>Email</strong></p>
+            <p><a href="mailto:hola@unsitiogenial.es">hola@unsitiogenial.es</a></p>
+            <p><strong>Redes sociales</strong></p>
+            <p><a href="#">@unsitiogenial</a></p>
+          </div>
 
-          {/* Botón para iniciar la reserva */}
           <div className={styles.reservationFormSection} id="reservar">
             <h1 className={styles.reservationtitle}>Haz una reserva</h1>
             <h3 className={styles.reservationparrafo}>Ven a vivir la experiencia Misku, reserva tu ​mesa y evita la espera, 

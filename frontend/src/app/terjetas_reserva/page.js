@@ -11,6 +11,10 @@ const typeHttpResponseText = {
   Internal: "Internal"
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bd8b5366dac4cc41972ea17889ff013eff9a52f
 export default function TarjetaReserva() {
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -105,6 +109,7 @@ export default function TarjetaReserva() {
           fecha: selectedDate.toISOString().split('T')[0], 
           hora: formattedTime 
         }
+<<<<<<< HEAD
       );
 
       if (res.statusText === typeHttpResponseText.Created) {
@@ -123,6 +128,12 @@ export default function TarjetaReserva() {
         });
         setSelectedDate(null);
         setSelectedTime(null);
+=======
+      )
+      if(res.statusText === typeHttpResponseText.Created){
+        setShowForm(false)
+        alert("Reserva realizada con exito");
+>>>>>>> 1bd8b5366dac4cc41972ea17889ff013eff9a52f
       }
 
     } catch (error) {
@@ -196,6 +207,7 @@ export default function TarjetaReserva() {
             <div className={styles.datePickerContainer}>
               <h2>Selecciona fecha</h2>
               <DatePicker
+                
                 selected={selectedDate}
                 onChange={handleDateChange}
                 dateFormat="dd/MM/yyyy"
