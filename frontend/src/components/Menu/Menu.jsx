@@ -4,7 +4,7 @@ import React from 'react'
 export function MenuItem({ item }) {
     return (
         <div className="menuItem"> 
-            <img src={item.foto} alt={item.titulo} className="menuItem img" /> 
+            <img src={item.image_url} alt={item.titulo} className="menuItem img" />
             <div className="itemDetails">
                 <h3 className="itemDetails h3">{item.titulo}</h3>
                 <p className="description">{item.descripcion}</p> 

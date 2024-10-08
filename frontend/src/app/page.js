@@ -15,7 +15,6 @@ export default function Home() {
 
   useEffect(() => {
     const getMenu = async () => {
-      //Obtener
       try {
         const res = await axios.get("http://127.0.0.1:8000/api/menu/");
         setMenuData(res.data);
@@ -102,6 +101,11 @@ export default function Home() {
           </div>
 
           <div className={styles.reservationFormSection} id="reservar">
+            <h1 className={styles.reservationtitle}>Haz una reserva</h1>
+            <h3 className={styles.reservationparrafo}>Ven a vivir la experiencia Misku, reserva tu ​mesa y evita la espera, 
+              tenemos promociones ​para tus eventos especiales como cumpleaños, 
+              ​aniversarios, cenas de navidad, 
+              despedidas de ​soltera... pregunta por nuestros paquetes.</h3>
           <Link href="/terjetas_reserva">
             <button className={styles.reserveButton}>
               Reservar mesa
@@ -114,6 +118,14 @@ export default function Home() {
         <footer className={styles.footer}>
           Restaurante Misku 2024 - <a href="#">Política de privacidad</a>
         </footer>
+
+        <div id="sfcpzrqek5hy8jy7m84n7jahus57bchee8x"></div>
+        <script type="text/javascript" src="https://counter6.optistats.ovh/private/counter.js?c=pzrqek5hy8jy7m84n7jahus57bchee8x&down=async" async></script>
+        <noscript>
+          <a href="https://www.contadorvisitasgratis.com" title="contador de visitas para blogger">
+            <img src="https://counter6.optistats.ovh/private/contadorvisitasgratis.php?c=pzrqek5hy8jy7m84n7jahus57bchee8x" border="0" title="contador de visitas para blogger" alt="contador de visitas para blogger"/>
+          </a>
+        </noscript>
       </section>
     </div>
   );

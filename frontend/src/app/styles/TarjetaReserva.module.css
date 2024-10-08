@@ -186,6 +186,14 @@
     font-size: 14px; /* Tamaño de fuente */
 }
 
+.formInputs {
+  display: grid; /* Usar grid para organizar los inputs */
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  gap: 15px; /* Espacio entre los inputs */
+  
+}
+
+
 .formInput:focus {
     border-color: #28a745; /* Borde verde al enfocar */
     outline: none; /* Quitar el contorno predeterminado */
@@ -226,4 +234,17 @@
     color: #050505;
     background: #ffffff;
     border-radius: 20px;
+}
+
+.errorContainer {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.errorMessage {
+  margin: 0;
 }
